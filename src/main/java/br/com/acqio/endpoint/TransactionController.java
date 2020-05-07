@@ -47,7 +47,7 @@ public class TransactionController {
 		return new ResponseEntity<>(transaction, HttpStatus.OK);
 	}
 
-	@RequestMapping(path = "/{all}", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<?> getAll(@PageableDefault(page = 0, size = 2) Pageable pageable) {
 		Page<Transaction> transactions = transactionService.getAll(pageable);
 		return new ResponseEntity<>(transactions, HttpStatus.OK);
@@ -56,6 +56,7 @@ public class TransactionController {
 	@PutMapping
 	@Transactional(rollbackFor = Exception.class)
 	public ResponseEntity<?> changeTransaction(@RequestBody Transaction transaction) {
+		verifyIfTransactionExists(transaction.getId());
 		Transaction change = transactionService.getOne(transaction.getId());
 		change.setCardApplication(transaction.getCardApplication());
 		change.setDate(transaction.getDate());
@@ -66,7 +67,7 @@ public class TransactionController {
 
 	}
 
-	@GetMapping(path = "/{id}")
+	@GetMapping(value =  "/{id}")
 	public ResponseEntity<?> getById(@PathVariable("id") Long id) {
 		verifyIfTransactionExists(id);
 		Transaction transaction = transactionService.getOne(id);
