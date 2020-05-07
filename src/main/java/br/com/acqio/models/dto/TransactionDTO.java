@@ -20,11 +20,9 @@ public class TransactionDTO {
 	private Long id;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	
 	private LocalDate date;
 
-	@JsonFormat( shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
 	private LocalTime time;
 
 	@Column(precision = 18, scale = 2)
@@ -33,115 +31,74 @@ public class TransactionDTO {
 	private CardApplication cardApplication;
 	@Enumerated(EnumType.STRING)
 	private Status status;
-	
-	
-	
-	
+
 	public Long getId() {
 		return id;
 	}
-
-
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
-
-
 	public LocalDate getDate() {
 		return date;
 	}
-
-
-
 
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-
-
-
 	public LocalTime getTime() {
 		return time;
 	}
-
-
-
 
 	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
-
-
-
 	public BigDecimal getValue() {
 		return value;
 	}
-
-
-
 
 	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 
-
-
-
 	public CardApplication getCardApplication() {
 		return cardApplication;
 	}
-
-
-
 
 	public void setCardApplication(CardApplication cardApplication) {
 		this.cardApplication = cardApplication;
 	}
 
-
-
-
 	public Status getStatus() {
 		return status;
 	}
-
-
-
 
 	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-
-
-
 	public Transaction transfomar() {
-		
-		Transaction transaction= new Transaction();
+
+		Transaction transaction = new Transaction();
 		transaction.setCardApplication(this.cardApplication);
 		transaction.setDate(this.date);
 		transaction.setStatus(this.status);
 		transaction.setValue(this.value);
-		//transaction.setTime( LocalDateTime.parse(time, DateTimeFormatter.ofPattern("HH:mm:ss")));
-		
-		//String time =(String) transactionDTO.getTime();
-	
-		//	LocalTime timeNew = LocalTime.parse(time);
-		
-		//LocalTime time_= LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm:ss"));
-		//System.out.println(time_);
-		
-		
-		
+		// transaction.setTime( LocalDateTime.parse(time,
+		// DateTimeFormatter.ofPattern("HH:mm:ss")));
+
+		// String time =(String) transactionDTO.getTime();
+
+		// LocalTime timeNew = LocalTime.parse(time);
+
+		// LocalTime time_= LocalTime.parse(time,
+		// DateTimeFormatter.ofPattern("HH:mm:ss"));
+		// System.out.println(time_);
+
 		return transaction;
 	}
-	
-	
 
 }

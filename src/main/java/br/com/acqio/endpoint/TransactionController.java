@@ -1,14 +1,9 @@
 package br.com.acqio.endpoint;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
+
 import java.util.Optional;
 
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -55,14 +50,14 @@ public class TransactionController {
 
 	@PutMapping
 	@Transactional(rollbackFor = Exception.class)
-	public ResponseEntity<?> changeTransaction(@RequestBody Transaction transaction) {
-		verifyIfTransactionExists(transaction.getId());
-		Transaction change = transactionService.getOne(transaction.getId());
-		change.setCardApplication(transaction.getCardApplication());
-		change.setDate(transaction.getDate());
-		change.setTime(transaction.getTime());
-		change.setStatus(transaction.getStatus());
-		change.setValue(transaction.getValue());
+	public ResponseEntity<?> changeTransaction(@RequestBody TransactionDTO transactionDTO) {
+		verifyIfTransactionExists(transactionDTO.getId());
+		Transaction change = transactionService.getOne(transactionDTO.getId());
+		change.setCardApplication(transactionDTO.getCardApplication());
+		change.setDate(transactionDTO.getDate());
+		change.setTime(transactionDTO.getTime());
+		change.setStatus(transactionDTO.getStatus());
+		change.setValue(transactionDTO.getValue());
 		return new ResponseEntity<>(change, HttpStatus.OK);
 
 	}
@@ -78,7 +73,7 @@ public class TransactionController {
 	private void verifyIfTransactionExists(Long id) {
 		Optional<Transaction> transactionExists = transactionService.findById(id);
 		if(! transactionExists.isPresent()) {
-			throw new ResourceNotFoundException("Transaction not found for ID" + id);
+			throw new ResourceNotFoundException("Transaction not found for ID  " + id);
 		}
 
 	}
