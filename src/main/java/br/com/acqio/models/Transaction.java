@@ -3,6 +3,7 @@ package br.com.acqio.models;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -32,10 +34,12 @@ public class Transaction {
 	private Long id;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@Column
 	private LocalDate date;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING,  pattern = "HH:mm:ss")
-	private LocalDateTime time;
+	@JsonFormat( shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+	@Column
+	private LocalTime time;
 
 	@Column(precision = 18, scale = 2)
 	private BigDecimal value;
@@ -43,53 +47,46 @@ public class Transaction {
 	private CardApplication cardApplication;
 	@Enumerated(EnumType.STRING)
 	private Status status;
-
+	
+	
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public LocalDate getDate() {
 		return date;
 	}
-
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-
-	public LocalDateTime getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
-
-	public void setTime(LocalDateTime time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
-
 	public BigDecimal getValue() {
 		return value;
 	}
-
 	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
-
 	public CardApplication getCardApplication() {
 		return cardApplication;
 	}
-
 	public void setCardApplication(CardApplication cardApplication) {
 		this.cardApplication = cardApplication;
 	}
-
 	public Status getStatus() {
 		return status;
 	}
-
 	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 }
