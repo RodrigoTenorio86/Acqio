@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.acqio.models.Transaction;
@@ -13,12 +16,15 @@ import lombok.Data;
 @Data
 public class TransactionInDTO {
 	private Long id;
+	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private LocalDate date;
+	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
 	private LocalTime time;	
-	private BigDecimal value;	
-	private CardApplication cardApplication;	
+	@NotNull
+	private BigDecimal value;
+	private CardApplication cardApplication;
 	private Status status;
 	
 	
