@@ -1,9 +1,11 @@
 package br.com.acqio.endpoint;
 
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import java.util.Optional;
 
-
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,9 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.acqio.errors.ResourceNotFoundException;
 import br.com.acqio.models.Transaction;
 import br.com.acqio.models.dto.TransactionDTO;
+import br.com.acqio.models.dto.TransactionInDTO;
 import br.com.acqio.service.TransactionService;
-
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
@@ -36,10 +37,10 @@ public class TransactionController {
 
 	@PostMapping
 	@Transactional(rollbackFor = Exception.class)
-	public ResponseEntity<?> register(@RequestBody  Transaction transactionDTO) {
-       // Transaction transaction = transactionDTO.transfomar();
-		Transaction transaction= transactionService.save(transactionDTO);		
-		return new ResponseEntity<>(transaction, HttpStatus.OK);
+	public ResponseEntity<?> register(@RequestBody @Valid  TransactionInDTO transactionInDTO) {
+		Transaction transaction = transactionInDTO.transform();
+		transaction= transactionService.save(transaction);		
+		return  new ResponseEntity<>(transaction,HttpStatus.CREATED);
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -50,14 +51,10 @@ public class TransactionController {
 
 	@PutMapping
 	@Transactional(rollbackFor = Exception.class)
-	public ResponseEntity<?> changeTransaction(@RequestBody TransactionDTO transactionDTO) {
-		verifyIfTransactionExists(transactionDTO.getId());
-		Transaction change = transactionService.getOne(transactionDTO.getId());
-		change.setCardApplication(transactionDTO.getCardApplication());
-		change.setDate(transactionDTO.getDate());
-		change.setTime(transactionDTO.getTime());
-		change.setStatus(transactionDTO.getStatus());
-		change.setValue(transactionDTO.getValue());
+	public ResponseEntity<?> changeTransaction(@RequestBody @Valid TransactionInDTO transactionInDTO) {
+		verifyIfTransactionExists(transactionInDTO.getId());
+		Transaction change = transactionService.getOne(transactionInDTO.getId());
+        transactionInDTO.transform(change);
 		return new ResponseEntity<>(change, HttpStatus.OK);
 
 	}

@@ -18,4 +18,6 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+  application:
+    name: Acqio
       

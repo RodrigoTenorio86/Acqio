@@ -12,27 +12,45 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.acqio.util.CardApplication;
 import br.com.acqio.util.Status;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 
 @Entity
+@Getter
+@Setter
+@Builder
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Transaction implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@EqualsAndHashCode.Include
 	private Long id;
 
+	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
-	@Column
+	@Column(nullable = false)
 	private LocalDate date;
-
+    @NotNull
 	@JsonFormat( shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-	@Column
+	@Column(nullable = false)
 	private LocalTime time;
-
-	@Column(precision = 18, scale = 2)
+    @NotNull
+	@Column(precision = 18, scale = 2, nullable = false)
 	private BigDecimal value;
 	@Enumerated(EnumType.STRING)
 	private CardApplication cardApplication;
@@ -41,65 +59,6 @@ public class Transaction implements Serializable{
 	
 	
 	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public LocalDate getDate() {
-		return date;
-	}
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-	public LocalTime getTime() {
-		return time;
-	}
-	public void setTime(LocalTime time) {
-		this.time = time;
-	}
-	public BigDecimal getValue() {
-		return value;
-	}
-	public void setValue(BigDecimal value) {
-		this.value = value;
-	}
-	public CardApplication getCardApplication() {
-		return cardApplication;
-	}
-	public void setCardApplication(CardApplication cardApplication) {
-		this.cardApplication = cardApplication;
-	}
-	public Status getStatus() {
-		return status;
-	}
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Transaction other = (Transaction) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
 
 	
 
