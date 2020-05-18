@@ -23,7 +23,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler{
 
 
 
-	@ExceptionHandler(MethodArgumentNotValidException.class)
+	//@ExceptionHandler(MethodArgumentNotValidException.class)
+	@Override
 	public ResponseEntity<Object>  handleMethodArgumentNotValid(MethodArgumentNotValidException rfnException, 
 																HttpHeaders headers, 
 																HttpStatus status, 
@@ -41,7 +42,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler{
 				                                              .detail("Field Validation Error. ")
 				                                              .title( "Field Validation Error. ")
 				                                              .developerMessage(rfnException.getClass().getName())
-				                                              .status(HttpStatus.BAD_REQUEST.value())
+				                                              .status(status.value())
 				                                              .field(field)
 				                                              .fieldMessage(fieldMessages)
 				                                              .build();
