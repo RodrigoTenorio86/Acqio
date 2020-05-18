@@ -1,5 +1,5 @@
 package br.com.acqio.util;
 
-public enum Status {
+public enum PaymentStatus {
 	SUCCESS, PENDING, CANCELED, FAILED
 }

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.acqio.models.Transaction;
 import br.com.acqio.util.CardApplication;
-import br.com.acqio.util.Status;
+import br.com.acqio.util.PaymentStatus;
 import lombok.Data;
 @Data
 public class TransactionDTO {
@@ -20,7 +20,7 @@ public class TransactionDTO {
 	private LocalTime time;	
 	private BigDecimal value;	
 	private CardApplication cardApplication;	
-	private Status status;
+	private PaymentStatus status;
 
 	
 

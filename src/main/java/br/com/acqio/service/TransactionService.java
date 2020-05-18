@@ -35,6 +35,10 @@ public class TransactionService {
 		return optional;
 	}
 
+	public void deleteByIf(Long id) {
+		dao.deleteById(id);		
+	}
+
 
 	
 	

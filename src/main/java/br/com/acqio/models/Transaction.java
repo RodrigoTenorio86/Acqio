@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.acqio.util.CardApplication;
-import br.com.acqio.util.Status;
+import br.com.acqio.util.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -55,7 +55,7 @@ public class Transaction implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private CardApplication cardApplication;
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private PaymentStatus status;
 	
 	
 	

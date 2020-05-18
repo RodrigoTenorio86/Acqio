@@ -4,14 +4,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.validation.constraints.NotEmpty;
+
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.acqio.models.Transaction;
 import br.com.acqio.util.CardApplication;
-import br.com.acqio.util.Status;
+import br.com.acqio.util.PaymentStatus;
 import lombok.Data;
 @Data
 public class TransactionInDTO {
@@ -25,11 +25,17 @@ public class TransactionInDTO {
 	@NotNull
 	private BigDecimal value;
 	private CardApplication cardApplication;
-	private Status status;
+	private PaymentStatus status;
 	
 	
 	public Transaction transform() {
-		return new Transaction( null, date, time, value, cardApplication, status);
+		return Transaction.builder()
+				          .cardApplication(cardApplication)
+				          .date(date)
+				          .time(time)
+				          .status(status)
+				          .value(value)
+				          .build();
 	}
 
 
