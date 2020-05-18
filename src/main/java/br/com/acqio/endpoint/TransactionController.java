@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.acqio.errors.ResourceNotFoundException;
 import br.com.acqio.models.Transaction;
-import br.com.acqio.models.dto.TransactionDTO;
 import br.com.acqio.models.dto.TransactionInDTO;
 import br.com.acqio.service.TransactionService;
 
