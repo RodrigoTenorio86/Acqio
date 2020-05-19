@@ -73,12 +73,13 @@
 	</dependencies>
 
 	<build>
+		<finalName>Acqio</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>Acqio</finalName>
+					<executable>true</executable>
 				</configuration>
 			</plugin>
 		</plugins>
