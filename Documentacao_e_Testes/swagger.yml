@@ -1,0 +1,133 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: 'localhost:8080'
+basePath: /acqio-api/v1
+info:
+  version: 1.0.0
+  title: Acqio Api
+  description: Adminstra a movimentação Credito do cliente e contrala acesso.
+  termsOfService: 'http://localhost:8080/acqio-api/v1/'
+  contact:
+    name: Rodrigo Tenorio de Boa Ventura
+    url: https://github.com/RodrigoTenorio86
+    email: boaventura19@yahoo.com.br
+  license:
+    name: MIT
+    url: 'http://opensource.org/licenses/MIT'
+    
+consumes: 
+  - application/json
+produces:
+  - application/json
+
+paths:
+  '/transactions':
+    post:
+      summary: cadastra transaction
+      description: cadastro um novo transaction
+      operationId: registerTransaction
+      parameters:
+        - in: body
+          name: transaction_
+          schema:
+            $ref: '#/definitions/Transaction'
+      responses:
+        '201':
+          description: Cadastro efetuado com Sucesso
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Requisição Invalida
+        '500':
+          description: Erro interno no servidor
+    put:
+      summary: alteracoes no Transaction
+      description: alteracoes no Transaction
+      operationId: changeTransaction
+      parameters:
+        - in: body
+          name: transaction_
+          schema:
+            $ref: '#/definitions/Transaction'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Transaction'
+  '/transactions/all':
+    get:
+      summary: Busca por todos os Transactions
+      description: Busca por todos os Transactions
+      operationId: getAll
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: "array"
+            items:
+              $ref: '#/definitions/Transaction'
+  '/transactions/{id}':
+    get:
+      summary: Busca por id do Transaction
+      description: Busca por id do Transaction
+      operationId: getById
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Transaction'
+    delete:
+      summary: excluir por Id do Transaction
+      description: delete
+      operationId: deleteById
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+      responses:
+        '202':
+          description: ACCEPTED
+definitions:
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        example: 1
+      date:
+        type: string
+        example: 01/01/2019
+      time:
+        type: string
+        example: '13:52:33'
+      value:
+        type: number
+        format: double
+        example: 100,00
+      cardApplication:
+        $ref: '#/definitions/CardApplication'
+      status:
+        $ref: '#/definitions/PaymentStatus'
+  CardApplication:
+    type: object
+    properties:
+      cardApplication:
+        type: string
+        example: 'DEBITO, CREDITO, VOUCHER'
+  PaymentStatus:
+    type: object
+    properties:
+      status:
+        type: string
+        example: 'SUCCESS, PENDING, CANCELED e FAILED'
