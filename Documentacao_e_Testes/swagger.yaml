@@ -43,8 +43,8 @@ paths:
         '500':
           description: Erro interno no servidor
     put:
-      summary: alteracoes no Transaction
-      description: alteracoes no Transaction
+      summary: alteracoes total no Transaction
+      description: alteracoes total no Transaction
       operationId: changeTransaction
       parameters:
         - in: body
@@ -54,6 +54,20 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            $ref: '#/definitions/Transaction'
+    patch:
+      summary: Alteracoes parcial do transaction
+      description: Alteracoes parcial do transaction
+      operationId: patchTransaction
+      parameters:
+        - in: body
+          name: transaction_
+          schema:
+            $ref: '#/definitions/Transaction'
+      responses:
+        200:
+          description: Alteracoes parcial do transaction
           schema:
             $ref: '#/definitions/Transaction'
   '/transactions/all':
