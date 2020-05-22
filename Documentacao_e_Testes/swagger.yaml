@@ -1,13 +1,15 @@
 swagger: '2.0'
+
 schemes:
   - http
   - https
+  
 host: 'localhost:8080'
 basePath: /acqio-api/v1
 info:
   version: 1.0.0
   title: Acqio Api
-  description: Adminstra a movimentação Credito do cliente e contrala acesso.
+  description: Administra a movimentação Credito do cliente e contrala acesso.
   termsOfService: 'http://localhost:8080/acqio-api/v1/'
   contact:
     name: Rodrigo Tenorio de Boa Ventura
@@ -21,10 +23,15 @@ consumes:
   - application/json
 produces:
   - application/json
+  
+tags: 
+  - name: Transactions
 
 paths:
   '/transactions':
     post:
+      tags:
+        - Transactions
       summary: cadastra transaction
       description: cadastro um novo transaction
       operationId: registerTransaction
@@ -43,6 +50,8 @@ paths:
         '500':
           description: Erro interno no servidor
     put:
+      tags:
+        - Transactions
       summary: alteracoes total no Transaction
       description: alteracoes total no Transaction
       operationId: changeTransaction
@@ -57,6 +66,8 @@ paths:
           schema:
             $ref: '#/definitions/Transaction'
     patch:
+      tags:
+        - Transactions
       summary: Alteracoes parcial do transaction
       description: Alteracoes parcial do transaction
       operationId: patchTransaction
@@ -72,6 +83,8 @@ paths:
             $ref: '#/definitions/Transaction'
   '/transactions/all':
     get:
+      tags:
+        - Transactions
       summary: Busca por todos os Transactions
       description: Busca por todos os Transactions
       operationId: getAll
@@ -84,6 +97,8 @@ paths:
               $ref: '#/definitions/Transaction'
   '/transactions/{id}':
     get:
+      tags:
+        - Transactions
       summary: Busca por id do Transaction
       description: Busca por id do Transaction
       operationId: getById
@@ -99,8 +114,10 @@ paths:
           schema:
             $ref: '#/definitions/Transaction'
     delete:
-      summary: excluir por Id do Transaction
-      description: delete
+      tags:
+        - Transactions
+      summary: exclui por Id o Transaction
+      description: delete do transaction
       operationId: deleteById
       parameters:
         - in: path
@@ -111,6 +128,7 @@ paths:
       responses:
         '202':
           description: ACCEPTED
+          
 definitions:
   Transaction:
     type: object
@@ -121,27 +139,47 @@ definitions:
         example: 1
       date:
         type: string
-        example: 01/01/2019
+        format: date
+        example: '01/01/2019'
       time:
         type: string
+        format: time
         example: '13:52:33'
       value:
         type: number
         format: double
         example: 100,00
       cardApplication:
-        $ref: '#/definitions/CardApplication'
+        type: string
+        example: 'DEBITO'
+        enum: 
+          - DEBITO
+          - CREDITO
+          - VOUCHER
       status:
-        $ref: '#/definitions/PaymentStatus'
+        type: string
+        example: 'SUCCESS'
+        enum: 
+          - SUCCESS
+          - PENDING
+          - CANCELED
+          - FAILED
   CardApplication:
     type: object
     properties:
       cardApplication:
         type: string
-        example: 'DEBITO, CREDITO, VOUCHER'
+        enum: 
+          - DEBITO
+          - CREDITO
+          - VOUCHER
   PaymentStatus:
     type: object
     properties:
       status:
         type: string
-        example: 'SUCCESS, PENDING, CANCELED e FAILED'
+        enum: 
+          - SUCCESS
+          - PENDING
+          - CANCELED
+          - FAILED
