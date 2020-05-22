@@ -14,6 +14,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,7 @@ import br.com.acqio.models.Transaction;
 import br.com.acqio.models.dto.TransactionInDTO;
 import br.com.acqio.service.TransactionService;
 
+//@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
 public class TransactionController {
@@ -66,7 +68,7 @@ public class TransactionController {
 		return new ResponseEntity<>(transaction, HttpStatus.OK);
 	}
 	
-	
+
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<?> deleteById(@PathVariable("id") Long id){
 		verifyIfTransactionExists(id);
