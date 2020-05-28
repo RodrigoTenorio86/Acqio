@@ -23,4 +23,6 @@ spring:
       ddl-auto: update
   application:
     name: Acqio
+  jmx:
+    enabled: false
   

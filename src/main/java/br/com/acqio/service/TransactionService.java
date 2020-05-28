@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 
 import br.com.acqio.models.Transaction;
 import br.com.acqio.repository.TransactionRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TransactionService {
 
-	@Autowired
-	private TransactionRepository dao;
+	//@Autowired
+	private final TransactionRepository dao;
 
 	public Transaction save( Transaction transaction) {		
 		return dao.save(transaction);
