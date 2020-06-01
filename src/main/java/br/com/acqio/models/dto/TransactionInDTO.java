@@ -2,6 +2,7 @@ package br.com.acqio.models.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 
@@ -29,10 +30,12 @@ public class TransactionInDTO {
 	
 	
 	public Transaction transform() {
+		LocalDateTime localDateTime = time.atDate(date);
+		
 		return Transaction.builder()
 				          .cardApplication(cardApplication)
 				          .date(date)
-				          .time(time)
+				          .time(localDateTime)
 				          .status(status)
 				          .value(value)
 				          .build();
@@ -40,10 +43,13 @@ public class TransactionInDTO {
 
 
 	public void transform(Transaction change) {
+		
+		LocalDateTime localDateTime = time.atDate(date);
+		
 		change.setCardApplication(cardApplication);
 		change.setDate(date);
 		change.setStatus(status);
-		change.setTime(time);
+		change.setTime(localDateTime);
 		change.setValue(value);		
 	}
 	

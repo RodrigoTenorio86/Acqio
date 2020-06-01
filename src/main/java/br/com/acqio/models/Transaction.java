@@ -3,6 +3,7 @@ package br.com.acqio.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
@@ -48,7 +49,7 @@ public class Transaction implements Serializable{
     @NotNull
 	@JsonFormat( shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
 	@Column(nullable = false)
-	private LocalTime time;
+	private LocalDateTime time;
     @NotNull
 	@Column(precision = 18, scale = 2, nullable = false)
 	private BigDecimal value;
