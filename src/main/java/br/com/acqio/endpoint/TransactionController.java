@@ -29,10 +29,12 @@ import br.com.acqio.errors.ResourceNotFoundException;
 import br.com.acqio.models.Transaction;
 import br.com.acqio.models.dto.TransactionInDTO;
 import br.com.acqio.service.TransactionService;
+import io.swagger.annotations.Api;
 
 //@CrossOrigin(origins = "*")
+@Api("EndPoints to manage Transaction")
 @RestController
-@RequestMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+//@RequestMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
 public class TransactionController {
 	@Autowired
 	private TransactionService transactionService;

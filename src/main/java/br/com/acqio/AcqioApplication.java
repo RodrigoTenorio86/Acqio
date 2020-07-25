@@ -11,7 +11,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EntityScan(basePackageClasses = { AcqioApplication.class, Jsr310JpaConverters.class })
 @EnableSpringDataWebSupport
-@EnableSwagger2
 public class AcqioApplication {
 
 	public static void main(String[] args) {
