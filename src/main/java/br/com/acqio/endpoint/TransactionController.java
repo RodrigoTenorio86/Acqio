@@ -29,13 +29,15 @@ import br.com.acqio.errors.ResourceNotFoundException;
 import br.com.acqio.models.Transaction;
 import br.com.acqio.models.dto.TransactionInDTO;
 import br.com.acqio.service.TransactionService;
+import lombok.RequiredArgsConstructor;
 
 //@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TransactionController {
-	@Autowired
-	private TransactionService transactionService;
+	
+	private final TransactionService transactionService;
 
 	@PostMapping
 	@Transactional(rollbackFor = Exception.class)
