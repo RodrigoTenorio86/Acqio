@@ -30,12 +30,12 @@ public class TransactionInDTO {
 	
 	
 	public Transaction transform() {
-		LocalDateTime localDateTime = time.atDate(date);
+		
 		
 		return Transaction.builder()
 				          .cardApplication(cardApplication)
 				          .date(date)
-				          .time(localDateTime)
+				          .time(time)
 				          .status(status)
 				          .value(value)
 				          .build();
@@ -44,12 +44,12 @@ public class TransactionInDTO {
 
 	public void transform(Transaction change) {
 		
-		LocalDateTime localDateTime = time.atDate(date);
+	
 		
 		change.setCardApplication(cardApplication);
 		change.setDate(date);
 		change.setStatus(status);
-		change.setTime(localDateTime);
+		change.setTime(time);
 		change.setValue(value);		
 	}
 	

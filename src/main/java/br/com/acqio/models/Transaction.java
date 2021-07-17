@@ -49,7 +49,7 @@ public class Transaction implements Serializable{
     @NotNull
 	@JsonFormat( shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
 	@Column(nullable = false)
-	private LocalDateTime time;
+	private LocalTime time;
     @NotNull
 	@Column(precision = 18, scale = 2, nullable = false)
 	private BigDecimal value;
